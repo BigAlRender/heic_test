@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: heic_test
+    env: ruby
+    buildCommand: "./bin/render-build.sh"
+    #preDeployCommand: "./bin/rails db:migrate"
+    startCommand: "./bin/render-start.sh"
+    region: oregon
+    disk:
+      name: storage
+      mountPath: /storage
+      sizeGB: 1
+    envVars:
+      - key: ACTIVE_STORAGE_DIR
+        value: "/storage"
+      - key: WEB_CONCURRENCY
+        value: 2
+      - key: RAILS_MASTER_KEY
+        sync: false
